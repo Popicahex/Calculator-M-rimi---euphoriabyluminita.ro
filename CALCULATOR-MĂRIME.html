@@ -1,0 +1,360 @@
+
+
+<div id="size-recommender-container">
+  <button id="show-recommender">
+    Găsește-mi Mărimea 📏
+  </button>
+
+  <div id="size-recommender">
+    <h3>Găsește-ți Mărimea Potrivită</h3>
+    <form id="sizeForm">
+      <label for="height">Înălțime (cm):</label>
+      <input type="number" id="height" min="130" max="220" required>
+
+      <label for="weight">Greutate (kg):</label>
+      <input type="number" id="weight" min="35" max="160" required>
+
+      <label for="sex">Sex:</label>
+      <select id="sex">
+        <option value="female">Femeie</option>
+        <option value="male">Bărbat</option>
+      </select>
+
+      <button type="submit">Calculează Mărimea</button>
+    </form>
+
+    <div id="error-message"></div>
+
+    <div id="result">
+      <div id="output-text"></div>
+      <div class="size-bar">
+        <div class="size-indicator" id="size-indicator" style="left: 0%;"></div>
+      </div>
+      <div class="size-labels">
+        <span>XS</span><span>S</span><span>M</span><span>L</span><span>XL</span><span>XXL</span><span>XXXL</span>
+      </div>
+    </div>
+
+    <div id="size-guide">
+      <h4>📏 Ghid General de Mărimi</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Mărime</th>
+            <th>Numeric (EU)</th>
+            <th>Bust (cm)</th>
+            <th>Talie (cm)</th>
+            <th>Șold (cm)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>XS</td>
+            <td>30–32</td>
+            <td>76–80</td>
+            <td>58–62</td>
+            <td>84–88</td>
+          </tr>
+          <tr>
+            <td>S</td>
+            <td>34–36</td>
+            <td>82–86</td>
+            <td>64–68</td>
+            <td>88–92</td>
+          </tr>
+          <tr>
+            <td>M</td>
+            <td>36–38</td>
+            <td>86–92</td>
+            <td>68–74</td>
+            <td>92–98</td>
+          </tr>
+          <tr>
+            <td>L</td>
+            <td>38–40</td>
+            <td>92–98</td>
+            <td>74–80</td>
+            <td>98–104</td>
+          </tr>
+          <tr>
+            <td>XL</td>
+            <td>40–42</td>
+            <td>98–104</td>
+            <td>80–88</td>
+            <td>104–110</td>
+          </tr>
+          <tr>
+            <td>XXL</td>
+            <td>42–44</td>
+            <td>104–110</td>
+            <td>88–96</td>
+            <td>110–116</td>
+          </tr>
+          <tr>
+            <td>XXXL</td>
+            <td>44–46</td>
+            <td>110–116</td>
+            <td>96–104</td>
+            <td>116–122</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<style>
+  #size-recommender-container {
+    position: relative;
+    max-width: 700px;
+    width: 95%;
+    margin: 40px auto;
+    font-family: inherit;
+  }
+
+  #size-recommender-container #size-recommender {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+    padding: 30px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.06);
+  }
+
+  #size-recommender-container #size-recommender.visible {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  #size-recommender-container #show-recommender {
+    display: block;
+    margin: 40px auto;
+    padding: 14px 28px;
+    background-color: #DB3E3E;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10;
+  }
+
+  #size-recommender-container #show-recommender:hover {
+    background-color: #1f54a5;
+  }
+
+  #size-recommender-container h3 {
+    text-align: center;
+    font-size: 1.6em;
+    color: #2c3e50;
+    margin-bottom: 25px;
+  }
+
+  #size-recommender-container label {
+    display: block;
+    font-weight: 600;
+    margin: 12px 0 6px;
+    font-size: 1em;
+    color: #34495e;
+  }
+
+  #size-recommender-container input,
+  #size-recommender-container select {
+    width: 100%;
+    padding: 12px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-sizing: border-box;
+  }
+
+  #size-recommender-container button[type="submit"] {
+    width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+    background-color: #DB3E3E;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1.1em;
+    cursor: pointer;
+  }
+
+  #size-recommender-container button[type="submit"]:hover {
+    background-color: #1f54a5;
+  }
+
+  #size-recommender-container #error-message,
+  #size-recommender-container #result {
+    text-align: center;
+    margin-top: 25px;
+    padding: 15px;
+    border-radius: 12px;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.5s ease;
+  }
+
+  #size-recommender-container #error-message.visible {
+    background-color: #ffe6e6;
+    color: #cc0000;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  #size-recommender-container #result.visible {
+    background-color: #f0f8ff;
+    color: #2c3e50;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  #size-recommender-container #result span {
+    font-size: 1.3em;
+    font-weight: bold;
+    display: block;
+    margin-top: 8px;
+  }
+
+  #size-recommender-container .size-bar {
+    margin-top: 14px;
+    height: 18px;
+    border-radius: 12px;
+    background: #ccc;
+    position: relative;
+  }
+
+  #size-recommender-container .size-indicator {
+    position: absolute;
+    top: -6px;
+    width: 14px;
+    height: 30px;
+    background: #000;
+    border-radius: 4px;
+    transition: left 0.4s ease;
+  }
+
+  #size-recommender-container .size-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9em;
+    margin-top: 8px;
+    color: #666;
+  }
+
+  #size-recommender-container #size-guide {
+    display: none;
+    margin-top: 30px;
+    background-color: #fcfcfc;
+    border: 1px solid #ddd;
+    border-radius: 14px;
+    padding: 25px;
+    animation: fadeIn 0.4s ease-in-out;
+    overflow-x: auto;
+  }
+
+#size-recommender-container #size-guide h4 {
+  text-align: center;
+  font-size: 2em;
+  font-weight: bold;
+  color: #2c3e50;
+  margin-bottom: 15px;
+  white-space: nowrap;
+}
+
+
+  #size-recommender-container #size-guide table {
+    width: 100%;
+    min-width: 540px;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 0.95em;
+  }
+
+  #size-recommender-container #size-guide th,
+  #size-recommender-container #size-guide td {
+    border: 1px solid #ccc;
+    padding: 12px;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  #size-recommender-container #size-guide th {
+    background-color: #f5f5f5;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+
+<script>
+  document.getElementById('show-recommender').addEventListener('click', function() {
+    const recommender = document.getElementById('size-recommender');
+    recommender.classList.add('visible');
+    this.style.display = 'none';
+  });
+
+  document.getElementById('sizeForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const height = parseInt(document.getElementById('height').value);
+    const weight = parseInt(document.getElementById('weight').value);
+    const sex = document.getElementById('sex').value;
+
+    const errorDiv = document.getElementById('error-message');
+    const resultDiv = document.getElementById('result');
+    const guide = document.getElementById('size-guide');
+    const outputText = document.getElementById('output-text');
+    const indicator = document.getElementById('size-indicator');
+    const sizeBar = document.querySelector('.size-bar');
+
+    errorDiv.classList.remove('visible');
+    resultDiv.classList.remove('visible');
+    guide.style.display = 'none';
+
+    if (height < 130 || height > 220 || weight < 35 || weight > 160) {
+      errorDiv.innerHTML = `⚠️ Valorile introduse nu sunt în intervalul admis:<br>
+      • Înălțime: 130–220 cm<br>
+      • Greutate: 35–160 kg`;
+      errorDiv.classList.add('visible');
+      return;
+    }
+
+    const bmi = weight / ((height / 100) * (height / 100));
+    let size = '', numeric = '', position = 0, gradient = '';
+
+    if (sex === 'male') {
+      gradient = 'linear-gradient(to right, #cce5ff 14.28%, #99ccff 14.28% 28.56%, #66b3ff 28.56% 42.84%, #3399ff 42.84% 57.12%, #0073e6 57.12% 71.4%, #005bb5 71.4% 85.68%, #004080 85.68%)';
+      if (bmi < 18) { size = 'XS'; numeric = '30–32'; position = 0; }
+      else if (bmi < 20) { size = 'S'; numeric = '44–46'; position = 14; }
+      else if (bmi < 23) { size = 'M'; numeric = '36–38'; position = 28; }
+      else if (bmi < 26) { size = 'L'; numeric = '38–40'; position = 42; }
+      else if (bmi < 29) { size = 'XL'; numeric = '40–42'; position = 57; }
+      else if (bmi < 32) { size = 'XXL'; numeric = '42–44'; position = 71; }
+      else { size = 'XXXL'; numeric = '44–46'; position = 85; }
+    } else {
+      gradient = 'linear-gradient(to right, #ffe6e6 14.28%, #ffb3b3 14.28% 28.56%, #ff8080 28.56% 42.84%, #ff4d4d 42.84% 57.12%, #ff1a1a 57.12% 71.4%, #cc0000 71.4% 85.68%, #990000 85.68%)';
+      if (bmi < 17.5) { size = 'XS'; numeric = '30–32'; position = 0; }
+      else if (bmi < 19) { size = 'S'; numeric = '34–36'; position = 14; }
+      else if (bmi < 22) { size = 'M'; numeric = '36–38'; position = 28; }
+      else if (bmi < 25) { size = 'L'; numeric = '38–40'; position = 42; }
+      else if (bmi < 28) { size = 'XL'; numeric = '40–42'; position = 57; }
+      else if (bmi < 31) { size = 'XXL'; numeric = '42–44'; position = 71; }
+      else { size = 'XXXL'; numeric = '44–46'; position = 85; }
+    }
+
+    outputText.innerHTML = `🔍 Mărimea recomandată este: <span>Litere: ${size}</span><br><strong>Numeric: ${numeric}</strong>`;
+    indicator.style.left = `${position}%`;
+    sizeBar.style.background = gradient;
+    resultDiv.classList.add('visible');
+    guide.style.display = 'block';
+  });
+</script>
