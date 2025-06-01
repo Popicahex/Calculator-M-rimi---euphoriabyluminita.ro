@@ -1,4 +1,4 @@
-# Calculator-M-rimi---euphoriabyluminita.ro
+# Calculator-Marimi---euphoriabyluminita.ro
 Calculatorul de mărimi folosit pe site-ul euphoriabyluminita.ro
 
 Descriere
