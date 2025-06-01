@@ -25,8 +25,11 @@ Design responsive și animat, ușor de integrat în orice site.
 
 Cum se folosește
 Apasă butonul Găsește-mi Mărimea 📏 pentru a deschide calculatorul.
+
 ![image](https://github.com/user-attachments/assets/8a54cbef-ecc7-4604-a526-43d39d8d3339)
+
 Completează înălțimea și greutatea în câmpurile numerice.
+
 ![image](https://github.com/user-attachments/assets/77c800c8-57f9-4ded-aa17-006313a7a1d6)
 
 Selectează sexul (Femeie sau Bărbat).
@@ -34,9 +37,11 @@ Selectează sexul (Femeie sau Bărbat).
 Apasă butonul Calculează Mărimea.
 
 Vei primi recomandarea mărimii potrivite, afișată atât text, cât și vizual pe bara de mărimi.
+
 ![image](https://github.com/user-attachments/assets/e42e45ce-bd3e-451e-94b3-2158aa9b3db1)
 
 Consultă ghidul general de mărimi pentru detalii suplimentare.
+
 ![image](https://github.com/user-attachments/assets/9ec0505c-8e14-48b7-bd9a-2aeea5f223ec)
 
 Instalare și integrare
